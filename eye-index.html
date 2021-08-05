@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta http-equiv="X-UA-Compatible"  content="ie=edge">
+    <link rel="stylesheet" href="eye-style.css">
+    <title>Document</title>
+</head>
+
+<body onload="docReady()" onkeydown="" onkeyup="">
+    <div class="body" id="body">
+        <div class="eyes">
+            <div class="eye"id="eye">
+                <div class="ball"></div>
+            </div>
+            <div class="eye">
+                <div class="ball"></div>
+            </div>
+        </div>
+    
+    
+    <script>
+        var ball = document.getElementsByClassName("ball");
+        var posLeft = document.getElementById('body').offsetLeft;
+        var posTop = document.getElementById('body').offsetTop;
+    
+         // this is for eye movement
+        document.onmousemove=function() {
+            var x=event.clientX * 100/ window.innerWidth + "%";
+            var y = event.clientY * 100 / window.innerHeight + "%";
+
+            for(var i=0; i<2; i++) {
+                ball[i].style.left=x/2;
+                ball[i].style.top = y / 2;
+                ball[i].style.transform="translate(" + x + "," + y + ")"; 
+            }
+        }
+
+    // this is for body movement
+
+    // this function gets called when up arrow is pressed
+    function upArrowPressed() {
+         document.getElementById('body').style.marginTop  = (posTop-58)+"px";
+    }
+
+     // this function gets called when down arrow is pressed
+    function downArrowPressed() {
+        document.getElementById('body').style.marginTop  = (posTop+58)+"px";
+    }
+
+    // this function gets called when there is an arrow key event
+    function moveSelection(evt) {
+        switch (evt.keyCode) {
+            case 38:
+            upArrowPressed();
+            break;
+            case 40:
+            downArrowPressed();
+            break;
+        }
+    };
+
+    // this gets called on opening the file in browser
+    function docReady()
+    {
+        window.addEventListener('keydown', moveSelection);
+    }
+        </script>
+</body>
+
+
+</html>
